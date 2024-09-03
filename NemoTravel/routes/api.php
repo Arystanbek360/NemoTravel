@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\AirportsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +13,13 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => 'api', 'prefix' => 'v1'], function () {
+//    Можно было через resource пустить просто решил для красоты оставить так
+    Route::controller(AirportsController::class)->prefix('airports')->group(function () {
+        Route::get('/', 'getPaginated');
+        Route::post('/create', 'create');
+        Route::post('/{airport}/update', 'update');
+        Route::delete('/{airport}/delete', 'delete');
+    });
 });
+
