@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
 Route::group(['middleware' => 'api', 'prefix' => 'v1'], function () {
 //    Можно было через resource пустить просто решил для красоты оставить так
     Route::controller(AirportsController::class)->prefix('airports')->group(function () {

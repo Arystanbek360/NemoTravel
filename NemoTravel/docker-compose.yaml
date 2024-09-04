@@ -1,0 +1,51 @@
+version: "3.7"
+
+services:
+  travel:
+    build:
+      args:
+        user: www
+      context: ./
+      dockerfile: Dockerfile
+    container_name: travel
+    restart: unless-stopped
+    networks:
+      - app
+  db:
+    image: postgres:alpine3.20
+    container_name: database
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: "postgres"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_ROOT_PASSWORD: "password"
+      SERVICE_TAGS: local
+      SERVICE_NAME: pgsql
+    ports:
+      - 5432:5432
+    networks:
+      - app
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-container
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./:/var/www
+    depends_on:
+      - travel
+    networks:
+      - app
+
+networks:
+  app:
+    driver: bridge
+
+volumes:
+  pgdata:
+  pgadmin:
