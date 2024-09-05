@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateRequest;
 use App\Http\Requests\IndexRequest;
+use App\Http\Requests\UpdateRequest;
+use App\Http\Resources\AirportResource;
 use App\Models\Airports;
 use App\Services\AirportsService;
 use Illuminate\Http\JsonResponse;
@@ -21,6 +23,13 @@ class AirportsController extends Controller
         });
     }
 
+    public function show(Airports $airport): JsonResponse
+    {
+        return self::response(function () use ($airport) {
+            return AirportResource::make($airport);
+        });
+    }
+
     public function create(CreateRequest $request): JsonResponse
     {
         return self::response(function () use ($request) {
@@ -28,7 +37,7 @@ class AirportsController extends Controller
         });
     }
 
-    public function update(Airports $airport, CreateRequest $request): JsonResponse
+    public function update(Airports $airport, UpdateRequest $request): JsonResponse
     {
         return self::response(function () use ($airport, $request) {
             return $this->service->update($airport, $request->validated());

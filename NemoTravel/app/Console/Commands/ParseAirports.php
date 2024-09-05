@@ -18,20 +18,16 @@ class ParseAirports extends Command
 
         foreach ($airports as $code => $airport) {
             $airportData = [
-                'code'        => $code,
-                'cityName'    => [
-                    'ru' => $airport['cityName']['ru'],
-                    'en' => $airport['cityName']['en'],
-                ],
-                'airportName' => [
-                    'ru' => $airport['airportName']['ru'] ?? null,
-                    'en' => $airport['airportName']['en'] ?? null,
-                ],
-                'area'        => $airport['area'] ?? null,
-                'country'     => $airport['country'],
-                'lat'         => $airport['lat'] ?? null,
-                'lng'         => $airport['lng'] ?? null,
-                'timezone'    => $airport['timezone'],
+                'code'           => $code,
+                'cityName_ru'    => $airport['cityName']['ru'],
+                'cityName_en'    => $airport['cityName']['en'],
+                'airportName_ru' => $airport['airportName']['ru'] ?? null,
+                'airportName_en' => $airport['airportName']['en'] ?? null,
+                'area'           => $airport['area'] ?? null,
+                'country'        => $airport['country'],
+                'lat'            => $airport['lat'] ?? null,
+                'lng'            => $airport['lng'] ?? null,
+                'timezone'       => $airport['timezone'],
             ];
 
             Airports::create($airportData);

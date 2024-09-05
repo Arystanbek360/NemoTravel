@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Repository
 {
-    public const ORDER = 'id';
+    public const ORDER = 'code';
     public const SORT = 'desc';
     public const PER_PAGE = 20;
 

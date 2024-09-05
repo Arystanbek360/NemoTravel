@@ -12,9 +12,11 @@ return new class extends Migration {
     {
         Schema::create('airports', function (Blueprint $table) {
             $table->string('code', 3)->primary();
-            $table->json('cityName');
-            $table->json('airportName')->nullable();
-            $table->string('area')->nullable();
+            $table->string('cityName_ru');
+            $table->string('cityName_en');
+            $table->string('airportName_ru')->nullable();
+            $table->string('airportName_en')->nullable();
+            $table->string('area', 3)->nullable();
             $table->string('country', 2)->nullable();
             $table->decimal('lat')->nullable();
             $table->decimal('lng')->nullable();

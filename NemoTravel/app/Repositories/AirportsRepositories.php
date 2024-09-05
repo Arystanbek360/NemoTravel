@@ -28,6 +28,36 @@ class AirportsRepositories extends Repository
 
     private function applyFilter(Builder $query, array $params = []): Builder
     {
+        if (isset($params['code'])) {
+            $query->where('code', 'ilike', $params['code'] . '%');
+        }
+
+        if (isset($params['area'])) {
+            $query->where('area', 'ilike', $params['area'] . '%');
+        }
+
+
+        if (isset($params['country'])) {
+            $query->where('country', 'ilike', $params['country'] . '%');
+        }
+
+        if (isset($params['cityName'])) {
+            $query->where('cityName_ru', 'ilike', '%' . $params['cityName'] . '%')
+                ->orWhere('cityName_en', 'ilike', '%' . $params['cityName'] . '%');
+        }
+
+        if (isset($params['filter'])) {
+            $query->where('cityName_ru', 'ilike', '%' . $params['cityName'] . '%')
+                ->orWhere('cityName_en', 'ilike', '%' . $params['cityName'] . '%')
+                ->orWhere('airportName_ru', 'ilike', '%' . $params['airportName'] . '%')
+                ->orWhere('airportName_en', 'ilike', '%' . $params['airportName'] . '%');
+        }
+
+        if (isset($params['airportName'])) {
+            $query->where('airportName_ru', 'ilike', '%' . $params['airportName'] . '%')
+                ->orWhere('airportName_en', 'ilike', '%' . $params['airportName'] . '%');
+        }
+
         return $query;
     }
 }

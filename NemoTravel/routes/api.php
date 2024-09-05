@@ -19,7 +19,8 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1'], function () {
     Route::controller(AirportsController::class)->prefix('airports')->group(function () {
         Route::get('/', 'getPaginated');
         Route::post('/create', 'create');
-        Route::post('/{airport}/update', 'update');
+        Route::get('/{airport}', 'show');
+        Route::put('/{airport}/update', 'update');
         Route::delete('/{airport}/delete', 'delete');
     });
 });

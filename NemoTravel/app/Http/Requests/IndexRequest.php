@@ -14,11 +14,17 @@ class IndexRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'filter'  => ['nullable', 'string'],
-            'orderBy' => ['nullable', 'string', 'in:id,created_at,updated_at'],
-            'sort'    => ['nullable', 'in:asc,desc'],
-            'perPage' => ['nullable', 'integer'],
-            'page'    => ['nullable', 'integer'],
+            'filter'      => ['nullable', 'string'],
+            'orderBy'     => ['nullable', 'string', 'in:created_at,updated_at,code,lat,lng,country'],
+            'sort'        => ['nullable', 'in:asc,desc'],
+            'perPage'     => ['nullable', 'integer'],
+            'page'        => ['nullable', 'integer'],
+            'code'        => ['nullable', 'string', 'max:3'],
+            'area'        => ['nullable', 'string', 'max:3'],
+            'country'     => ['nullable', 'string', 'max:2'],
+            'cityName'    => ['nullable', 'string'],
+            'airportName' => ['nullable', 'string'],
+
         ];
     }
 }

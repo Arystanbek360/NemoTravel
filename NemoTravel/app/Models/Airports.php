@@ -16,8 +16,10 @@ class Airports extends Model
 
     protected $fillable = [
         'code',
-        'cityName',
-        'airportName',
+        'cityName_ru',
+        'cityName_en',
+        'airportName_ru',
+        'airportName_en',
         'area',
         'country',
         'lat',
@@ -26,10 +28,8 @@ class Airports extends Model
     ];
 
     protected $casts = [
-        'cityName'    => 'array',
-        'airportName' => 'array',
-        'lat'         => 'float',
-        'lng'         => 'float',
+        'lat' => 'float',
+        'lng' => 'float',
     ];
 
 }
